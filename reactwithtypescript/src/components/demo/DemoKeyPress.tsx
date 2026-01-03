@@ -1,20 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useEventListener } from "../../hooks/useEventListener";
 
 export function DemoKeyPress({ userInput }) {
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const name = urlParams.get("name"); // Source of untrusted data
-
-    if (name) {
-      // Sink: innerHTML interprets the string as HTML, triggering a CodeQL XSS alert (CWE-079)
-      const greetingElem = document.getElementById("greeting");
-      if (greetingElem) {
-        greetingElem.innerHTML = "Hello, " + name;
-      }
-    }
-  }, []);
-
   const [open, setOpen] = useState(false);
 
   useEventListener("keydown", (e) => {
@@ -25,7 +12,6 @@ export function DemoKeyPress({ userInput }) {
 
   return (
     <div>
-      <div id="greeting">Hello!</div>
       <div dangerouslySetInnerHTML={{ __html: userInput }} />
       <h2>Key Press Demo</h2>
       <button onClick={() => setOpen(true)}>Open Modal</button>
