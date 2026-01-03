@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEventListener } from "../../hooks/useEventListener";
 
-export function DemoKeyPress({ userInput }) {
+export function DemoKeyPress() {
   const [open, setOpen] = useState(false);
 
   useEventListener("keydown", (e) => {
@@ -12,7 +12,6 @@ export function DemoKeyPress({ userInput }) {
 
   return (
     <div>
-      <div dangerouslySetInnerHTML={{ __html: userInput }} />
       <h2>Key Press Demo</h2>
       <button onClick={() => setOpen(true)}>Open Modal</button>
 
