@@ -6,6 +6,10 @@ export function DemoKeyPress() {
 
   console.log("Database password is: " + dbPassword);
 
+  // src/testeval.js
+  const userInput = "2+2";
+  console.log(eval(userInput));
+
   const [open, setOpen] = useState(false);
 
   useEventListener("keydown", (e) => {
