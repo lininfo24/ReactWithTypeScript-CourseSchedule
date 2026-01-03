@@ -2,17 +2,6 @@ import { useState } from "react";
 import { useEventListener } from "../../hooks/useEventListener";
 
 export function DemoKeyPress() {
-  const password = "abc123";
-  eval("alert('hi')");
-
-  const dbPassword = "supersecret123"; // Hardcoded credential: CodeQL will flag this
-
-  console.log("Database password is: " + dbPassword);
-
-  // src/testeval.js
-  const userInput = "2+2";
-  console.log(eval(userInput));
-
   const [open, setOpen] = useState(false);
 
   useEventListener("keydown", (e) => {
