@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useEventListener } from "../../hooks/useEventListener";
 
-export function DemoKeyPress() {
+export function DemoKeyPress({ userInput }) {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const name = urlParams.get("name"); // Source of untrusted data
@@ -26,6 +26,7 @@ export function DemoKeyPress() {
   return (
     <div>
       <div id="greeting">Hello!</div>
+      <div dangerouslySetInnerHTML={{ __html: userInput }} />
       <h2>Key Press Demo</h2>
       <button onClick={() => setOpen(true)}>Open Modal</button>
 
