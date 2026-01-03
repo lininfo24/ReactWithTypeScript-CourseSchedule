@@ -38,6 +38,15 @@ jobs:
         run: npm install @microsoft/eslint-formatter-sarif@3.1.0
         working-directory: reactwithtypescript
 
+      - name: Run ESLint (human-readable output)
+        env:
+          SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
+        working-directory: reactwithtypescript
+        run: npx eslint .
+          --config eslint.config.js
+          --ext .js,.jsx,.ts,.tsx
+        continue-on-error: true
+
       - name: Run ESLint
         env:
           SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
