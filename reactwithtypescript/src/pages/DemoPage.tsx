@@ -9,6 +9,7 @@ import useWindowSize from "../hooks/useWindowSize";
 
 const DemoPage: React.FC = () => {
   const windowSize = useWindowSize();
+  const unusedVariable = 42;
   return (
     <>
       <div>
