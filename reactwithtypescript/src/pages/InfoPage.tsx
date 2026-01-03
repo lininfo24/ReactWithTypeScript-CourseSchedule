@@ -4,7 +4,6 @@ import useWindowSize from "../hooks/useWindowSize";
 
 const InfoPage: React.FC = () => {
   const windowSize = useWindowSize();
-  const unusedVariable = 42;
   return (
     <div>
       <h2>Info Page</h2>
