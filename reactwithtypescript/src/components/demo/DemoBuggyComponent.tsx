@@ -1,7 +1,7 @@
 // DemoBuggyComponent.tsx
 /**
  * A component that simulates an error based on the hasError prop.
- * Use this to test your ErrorBoundary component.Hello
+ * Use this to test your ErrorBoundary component.
  */
 
 export const DemoBuggyComponent = () => {
