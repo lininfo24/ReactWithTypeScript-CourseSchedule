@@ -108,6 +108,7 @@ describe("CoursePlannerPage - best-practice tests", () => {
     removeTestListeners();
   });
 
+  // Test Case: Verify primary headings and accessibility anchors (one H1, presence of Course List and Add Course sections)
   it("renders primary headings and sections (semantic queries)", () => {
     render(<CoursePlannerPage />);
 
@@ -126,6 +127,7 @@ describe("CoursePlannerPage - best-practice tests", () => {
     expect(h1All).toHaveLength(1);
   });
 
+  // Test Case: Ensure mocked child components render and Course List appears under its heading
   it("renders mocked child components and respects structure", () => {
     render(<CoursePlannerPage />);
 
@@ -141,6 +143,7 @@ describe("CoursePlannerPage - best-practice tests", () => {
     expect(within(sibling as HTMLElement).getByTestId("mock-course-list")).toBeTruthy();
   });
 
+  // Test Case: User can type into course name and credits inputs; values update accordingly
   it("accepts user input and updates form controls (interaction test)", () => {
     render(<CoursePlannerPage />);
 
@@ -154,6 +157,7 @@ describe("CoursePlannerPage - best-practice tests", () => {
     expect(creditsInput.value).toBe("3");
   });
 
+  // Test Case: Submitting invalid or empty form shows appropriate validation error messages (scoped to form)
   it("renders validation errors when submitting invalid data (scoped queries)", async () => {
     render(<CoursePlannerPage />);
 
@@ -176,6 +180,7 @@ describe("CoursePlannerPage - best-practice tests", () => {
     expect(await screen.findByTestId("error-credits")).toHaveTextContent(/positive integer/i);
   });
 
+  // Test Case: Valid form submission dispatches submission payload (integration with child form)
   it("integrates with child form and receives submission payload (integration test)", async () => {
     const submissions: any[] = [];
     const handler = (e: Event) => submissions.push((e as CustomEvent).detail);
@@ -198,6 +203,7 @@ describe("CoursePlannerPage - best-practice tests", () => {
     window.removeEventListener("test-course-submitted", handler as EventListener);
   });
 
+  // Test Case: Simulate a child render error to document expected failure behavior (module-level re-mock)
   it("explicitly documents child-render failure behavior (module-level re-mock)", async () => {
     // This test verifies behavior when a child throws during render.
     // Reset module registry and provide a CourseList that throws.
@@ -228,6 +234,7 @@ describe("CoursePlannerPage - best-practice tests", () => {
     expect(renderError?.message).toContain("Simulated render error in CourseList");
   });
 
+  // Test Case: Demonstrate guidance — prefer semantic assertions over brittle snapshots
   it("avoids brittle snapshot assertions and focuses on semantics (guidance test)", () => {
     // This test is a placeholder that demonstrates best-practice: prefer semantic assertions
     // over full DOM snapshots. It will assert a few key semantics and intentionally not
