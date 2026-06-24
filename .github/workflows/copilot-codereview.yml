@@ -26,7 +26,7 @@ jobs:
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          copilot -p "Review the git diff of the changes between origin/${{ github.base_ref }} and HEAD. Focus on TypeScript, React, and general best practices. Identify bugs, architectural concerns, performance issues, or style improvements. Write a constructive, structured code review report in markdown format to review.md." --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
+          copilot -p "Review the git diff of the changes between origin/${{ github.base_ref }} and HEAD. Identify bugs, architectural concerns, performance issues, or critical style improvements. Be highly concise and brief, focusing only on actionable findings to save tokens and avoid filler text. Write the code review report in markdown format to review.md." --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
 
       - name: Post PR Review Comment
         env:
