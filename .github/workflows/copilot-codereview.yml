@@ -1,0 +1,39 @@
+name: Copilot PR Review
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pr-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v4
+
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Run Copilot CLI for PR Review
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          copilot -p "Review the git diff of the changes between origin/${{ github.base_ref }} and HEAD. Focus on TypeScript, React, and general best practices. Identify bugs, architectural concerns, performance issues, or style improvements. Write a constructive, structured code review report in markdown format to review.md." --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
+
+      - name: Post PR Review Comment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f review.md ] && [ -s review.md ]; then
+            gh pr comment ${{ github.event.pull_request.number }} --body-file review.md
+          else
+            echo "No review report found or report is empty."
+          fi
