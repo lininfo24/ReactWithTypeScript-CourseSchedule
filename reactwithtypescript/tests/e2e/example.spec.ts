@@ -27,6 +27,20 @@ test("get started link", async ({ page }) => {
 
   // Expects page to have a heading with the name of Installation.
   await expect(
-    page.getByRole("heading", { name: "Installation" })
+    page.getByRole("heading", { name: "Installation" }),
+  ).toBeVisible();
+});
+
+test("navigate to Course Planning and verify Course Schedule heading", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  // Click the 'Course Planning' link
+  await page.getByRole("link", { name: "Course Planning" }).click();
+
+  // Verify the text 'Course Schedule' is in the page as an h1
+  await expect(
+    page.getByRole("heading", { name: "Course Schedule", level: 1 }),
   ).toBeVisible();
 });
